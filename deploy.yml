@@ -16,4 +16,4 @@
 
     - name: Run new Docker container
       shell: |
-        docker run -d --name insureme_container -p 8080:8080 insureme
+        docker run -d --name insureme_container -p 8081:8081 insureme
