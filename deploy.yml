@@ -1,0 +1,19 @@
+---
+- hosts: worker
+  become: yes
+  tasks:
+    - name: Stop existing container
+      shell: |
+        docker ps -q --filter "insureme_container" | xargs -r docker stop
+
+    - name: Remove existing container
+      shell: |
+        docker ps -a -q --filter "insureme_container" | xargs -r docker rm
+
+    - name: Pull latest Docker image
+      shell: |
+        docker pull insureme
+
+    - name: Run new Docker container
+      shell: |
+        docker run -d --name insureme_container -p 8080:8080 insureme
